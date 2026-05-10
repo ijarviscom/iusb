@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="iUSB v1.0-beta">
+<title>Diagnostic Report, Jane Doe, 2026-05-10</title>
+<style>
+  :root {
+    --crit: #dc2626; --crit-bg: #fef2f2;
+    --warn: #d97706; --warn-bg: #fffbeb;
+    --info: #2563eb; --info-bg: #eff6ff;
+    --pass: #16a34a; --pass-bg: #f0fdf4;
+    --ink: #0f172a;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-500: #64748b;
+    --slate-300: #cbd5e1;
+    --slate-100: #f1f5f9;
+    --paper: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--slate-100);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 820px;
+    margin: 24px auto;
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 40px 48px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+  }
+  header.report-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--slate-100);
+    margin-bottom: 24px;
+  }
+  .head-left h1 {
+    margin: 0 0 4px;
+    font-size: 22px; font-weight: 700;
+  }
+  .head-left .badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background: var(--pass-bg); color: var(--pass);
+    margin-top: 4px;
+  }
+  .head-left .customer {
+    font-size: 12px; color: var(--slate-500);
+    margin-top: 6px;
+  }
+  .head-right {
+    text-align: right;
+    font-size: 12px; color: var(--slate-500);
+  }
+  .head-right .shop-name {
+    font-weight: 700; color: var(--ink); font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .machine-bar {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    padding: 12px 16px;
+    background: var(--slate-100);
+    border-radius: 6px;
+    margin-bottom: 24px;
+    font-size: 12px;
+  }
+  .machine-bar dt { color: var(--slate-500); font-weight: 600; }
+  .machine-bar dd { margin: 2px 0 0; color: var(--ink); font-weight: 500; }
+  .findings { margin-bottom: 24px; }
+  .finding {
+    display: grid;
+    grid-template-columns: 70px 1fr 80px 80px;
+    gap: 16px;
+    padding: 14px 16px;
+    border-left: 3px solid var(--slate-300);
+    background: var(--slate-100);
+    margin-bottom: 8px;
+    border-radius: 4px;
+    align-items: center;
+  }
+  .finding.f-crit { background: var(--crit-bg); border-left-color: var(--crit); }
+  .finding.f-warn { background: var(--warn-bg); border-left-color: var(--warn); }
+  .finding.f-info { background: var(--info-bg); border-left-color: var(--info); }
+  .finding.f-pass { background: var(--pass-bg); border-left-color: var(--pass); }
+  .sev {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .sev.crit { color: var(--crit); }
+  .sev.warn { color: var(--warn); }
+  .sev.info { color: var(--info); }
+  .sev.pass { color: var(--pass); }
+  .finding-title { font-weight: 600; font-size: 14px; }
+  .finding-explain { font-size: 12px; color: var(--slate-600); margin-top: 3px; }
+  .time, .cost {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .time { color: var(--slate-500); }
+  .summary {
+    display: flex; justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--ink); color: white;
+    border-radius: 6px;
+    margin-top: 12px;
+  }
+  .summary .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+  }
+  .summary .value {
+    font-size: 20px; font-weight: 700;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  footer.report-foot {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid var(--slate-100);
+    font-size: 11px;
+    color: var(--slate-500);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+  footer .shop-contact { color: var(--slate-700); }
+  footer .disclaimer { max-width: 360px; }
+  footer .generator { font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; padding: 20px 24px; }
+    .finding { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="report-head">
+    <div class="head-left">
+      <h1>Diagnostic Report</h1>
+      <span class="badge">Completed</span>
+      <div class="customer">Prepared for: Jane Doe</div>
+    </div>
+    <div class="head-right">
+      <div class="shop-name">Acme Computer Repair</div>
+      <div>(555) 555-0142</div>
+      <div>service@acmerepair.example</div>
+      <div>2026-05-10</div>
+    </div>
+  </header>
+
+  <dl class="machine-bar">
+    <div><dt>Manufacturer</dt><dd>Dell Inc.</dd></div>
+    <div><dt>Model</dt><dd>Latitude 7440</dd></div>
+    <div><dt>Serial</dt><dd>8VX3K92</dd></div>
+    <div><dt>OS</dt><dd>Windows 11 Pro (build 26100.1000)</dd></div>
+    <div><dt>CPU</dt><dd>Intel Core i7-1365U</dd></div>
+    <div><dt>RAM</dt><dd>16 GB</dd></div>
+  </dl>
+
+  <section class="findings" aria-label="Findings">
+
+    <div class="finding f-crit">
+      <div><span class="sev crit">CRIT</span></div>
+      <div>
+        <div class="finding-title">SSD failing: reallocated sectors exceeded threshold</div>
+        <div class="finding-explain">47 reallocated sectors detected on the primary drive. Recommend backing up customer data and replacing the drive before progressive failure.</div>
+      </div>
+      <div class="time">45 min</div>
+      <div class="cost">$89</div>
+    </div>
+
+    <div class="finding f-warn">
+      <div><span class="sev warn">WARN</span></div>
+      <div>
+        <div class="finding-title">Battery degraded to 62% of design capacity</div>
+        <div class="finding-explain">847 cycles. Runtime is approximately 60% of new. Battery replacement is the standard fix.</div>
+      </div>
+      <div class="time">30 min</div>
+      <div class="cost">$69</div>
+    </div>
+
+    <div class="finding f-warn">
+      <div><span class="sev warn">WARN</span></div>
+      <div>
+        <div class="finding-title">47 OS updates pending, oldest pending for 73 days</div>
+        <div class="finding-explain">Operating system has fallen behind on security updates. Recommend applying all pending updates and rebooting.</div>
+      </div>
+      <div class="time">30 min</div>
+      <div class="cost">$59</div>
+    </div>
+
+    <div class="finding f-info">
+      <div><span class="sev info">INFO</span></div>
+      <div>
+        <div class="finding-title">Bloatware detected: 4 OEM trial apps</div>
+        <div class="finding-explain">Pre-installed trial software from the manufacturer. Customer-removable; can be cleaned up during this service window with consent.</div>
+      </div>
+      <div class="time">15 min</div>
+      <div class="cost">$29</div>
+    </div>
+
+    <div class="finding f-pass">
+      <div><span class="sev pass">PASS</span></div>
+      <div>
+        <div class="finding-title">Memory integrity: passed</div>
+        <div class="finding-explain">16 GB DDR4 dual-channel. No ECC errors. No signs of memory pressure during the baseline observation window.</div>
+      </div>
+      <div class="time">&ndash;</div>
+      <div class="cost">&ndash;</div>
+    </div>
+
+  </section>
+
+  <div class="summary">
+    <div>
+      <div class="label">Est. Repair Time</div>
+      <div class="value">~95 min</div>
+    </div>
+    <div style="text-align: right">
+      <div class="label">Estimated Total</div>
+      <div class="value">$246</div>
+    </div>
+  </div>
+
+  <footer class="report-foot">
+    <div class="shop-contact">
+      Acme Computer Repair &middot; 123 Main St, Anytown &middot; (555) 555-0142
+    </div>
+    <div class="disclaimer">
+      Diagnostic estimates are approximate. Actual repair costs may vary based on parts and labor.
+    </div>
+    <div class="generator">Generated by iUSB v1.0-beta &middot; report id 8VX3K92-2026-05-10-1942</div>
+  </footer>
+
+</div>
+
+<script type="application/json" id="iusb-data">
+{
+  "_comment": "The same JSON output is embedded for PSA / RMM / ticketing integrations. Real reports include the full schema from examples/scan-output.example.json."
+}
+</script>
+
+</body>
+</html>

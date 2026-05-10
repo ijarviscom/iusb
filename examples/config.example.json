@@ -1,0 +1,86 @@
+{
+  "$schema": "https://iusb.us/schema/config-v1.json",
+  "_comment": "Starter configuration for iUSB. Copy to config.json on the USB root and edit. Every field is documented in docs/config.md.",
+
+  "shop": {
+    "name": "Acme Computer Repair",
+    "logo_path": "logo.png",
+    "website": "https://acmerepair.example",
+    "phone": "(555) 555-0142",
+    "email": "service@acmerepair.example",
+    "address": "123 Main St, Anytown",
+    "labor_rate_per_hour_usd": 95,
+    "minimum_charge_usd": 30,
+    "currency": "USD"
+  },
+
+  "report": {
+    "show_pass_findings": true,
+    "show_cost_column": true,
+    "show_time_estimates": true,
+    "include_machine_serial": true,
+    "severity_palette": {
+      "crit": "#dc2626",
+      "warn": "#d97706",
+      "info": "#2563eb",
+      "pass": "#16a34a"
+    },
+    "fonts": {
+      "body": "system-ui, -apple-system, 'Segoe UI', sans-serif",
+      "mono": "'IBM Plex Mono', 'Courier New', monospace"
+    },
+    "custom_footer_html": ""
+  },
+
+  "thresholds": {
+    "battery_health_warn_pct": 80,
+    "battery_health_crit_pct": 60,
+    "smart_pending_sectors_warn": 1,
+    "smart_reallocated_warn": 10,
+    "nvme_percent_used_warn": 80,
+    "nvme_percent_used_crit": 95,
+    "disk_free_warn_pct": 10,
+    "disk_free_crit_pct": 3,
+    "boot_time_warn_seconds": 60,
+    "boot_time_crit_seconds": 120,
+    "cpu_temp_warn_c": 85,
+    "cpu_temp_crit_c": 95,
+    "updates_stale_days": 30,
+    "av_stale_days": 30
+  },
+
+  "modules": {
+    "skip": [],
+    "only": [],
+    "battery_required": false,
+    "elevation": {
+      "prompt_once": true,
+      "skip_elevated_only": false
+    }
+  },
+
+  "software_audit": {
+    "bloatware_warn": [
+      "McAfee LiveSafe",
+      "Norton 360",
+      "WildTangent Games",
+      "Dropbox Promo",
+      "Candy Crush Saga",
+      "Cortana Companion",
+      "TikTok"
+    ],
+    "unsigned_binary_paths_warn": [
+      "/usr/local/bin",
+      "C:\\Program Files",
+      "C:\\Program Files (x86)",
+      "/Applications"
+    ],
+    "ignore_publishers": [
+      "Microsoft Corporation",
+      "Apple Inc.",
+      "Canonical Ltd.",
+      "Red Hat, Inc.",
+      "The Linux Foundation"
+    ]
+  }
+}

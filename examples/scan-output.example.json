@@ -1,0 +1,189 @@
+{
+  "$schema": "https://iusb.us/schema/scan-output-v1.json",
+  "_comment": "Example output of a single iUSB scan. The same JSON is embedded inside the HTML report as a <script type='application/json' id='iusb-data'> block, and can be written separately with launcher --json.",
+
+  "meta": {
+    "iusb_version": "1.0-beta",
+    "scan_started_iso": "2026-05-10T19:42:18-04:00",
+    "scan_completed_iso": "2026-05-10T19:43:32-04:00",
+    "scan_duration_seconds": 74,
+    "config_schema_version": "1.0",
+    "report_id": "8VX3K92-2026-05-10-1942",
+    "shop": {
+      "name": "Acme Computer Repair",
+      "labor_rate_per_hour_usd": 95
+    }
+  },
+
+  "machine": {
+    "manufacturer": "Dell Inc.",
+    "model": "Latitude 7440",
+    "serial_number": "8VX3K92",
+    "form_factor": "laptop",
+    "bios_version": "1.12.0",
+    "bios_date_iso": "2025-08-14",
+    "os_family": "windows",
+    "os_version": "Windows 11 Pro",
+    "os_build": "10.0.26100.1000",
+    "architecture": "x86_64",
+    "cpu_model": "Intel Core i7-1365U",
+    "ram_gb": 16,
+    "uptime_hours": 247,
+    "customer_label": "Jane Doe"
+  },
+
+  "summary": {
+    "total_findings": 5,
+    "crit_count": 1,
+    "warn_count": 2,
+    "info_count": 1,
+    "pass_count": 1,
+    "estimated_repair_minutes": 95,
+    "estimated_total_usd": 246
+  },
+
+  "modules": [
+    {
+      "module": "disk",
+      "module_label": "Disk / SMART",
+      "module_version": "1.0",
+      "exit_code": 0,
+      "findings": [
+        {
+          "id": "DSK-0001",
+          "severity": "CRIT",
+          "title": "SSD failing: reallocated sectors exceeded threshold",
+          "explanation": "The primary drive reports 47 reallocated sectors. This indicates progressive wear and a near-term risk of data loss. Recommend backing up customer data and replacing the drive.",
+          "recommended_action": "Clone the drive to a new SSD of equal or greater capacity, verify the clone, replace the failing drive.",
+          "estimated_repair_minutes": 45,
+          "estimated_cost_usd": 89,
+          "evidence": {
+            "smart_reallocated_sector_count": 47,
+            "smart_pending_sectors": 0,
+            "smart_overall_health": "WARNING",
+            "drive_model": "Samsung SSD 980 PRO 1TB",
+            "drive_firmware": "5B2QGXA7"
+          }
+        }
+      ]
+    },
+    {
+      "module": "battery",
+      "module_label": "Battery",
+      "module_version": "1.0",
+      "exit_code": 0,
+      "findings": [
+        {
+          "id": "BAT-0001",
+          "severity": "WARN",
+          "title": "Battery degraded to 62% of design capacity",
+          "explanation": "847 cycles, design capacity 60 Wh, current full-charge capacity 37 Wh. Runtime is roughly 60% of new. Battery replacement is the standard fix.",
+          "recommended_action": "Replace battery with manufacturer-spec part.",
+          "estimated_repair_minutes": 30,
+          "estimated_cost_usd": 69,
+          "evidence": {
+            "cycle_count": 847,
+            "design_capacity_wh": 60.0,
+            "full_charge_capacity_wh": 37.2,
+            "health_pct": 62
+          }
+        }
+      ]
+    },
+    {
+      "module": "security",
+      "module_label": "Security",
+      "module_version": "1.0",
+      "exit_code": 0,
+      "findings": [
+        {
+          "id": "SEC-0001",
+          "severity": "WARN",
+          "title": "47 OS updates pending, oldest pending for 73 days",
+          "explanation": "The operating system has fallen significantly behind on security updates. This widens the window for known vulnerabilities to be exploited.",
+          "recommended_action": "Apply all pending Windows Updates, reboot once, verify update history is current.",
+          "estimated_repair_minutes": 30,
+          "estimated_cost_usd": 59,
+          "evidence": {
+            "pending_update_count": 47,
+            "oldest_pending_age_days": 73,
+            "av_status": "active",
+            "av_definitions_age_days": 4,
+            "firewall_status": "active"
+          }
+        }
+      ]
+    },
+    {
+      "module": "software",
+      "module_label": "Software Audit",
+      "module_version": "1.0",
+      "exit_code": 0,
+      "findings": [
+        {
+          "id": "SWA-0001",
+          "severity": "INFO",
+          "title": "Bloatware detected: 4 OEM trial apps",
+          "explanation": "Pre-installed trial software from the OEM is consuming disk space and may show ads. Customer-removable.",
+          "recommended_action": "Walk through removal with the customer, or remove on their behalf with consent.",
+          "estimated_repair_minutes": 15,
+          "estimated_cost_usd": 29,
+          "evidence": {
+            "bloatware_detected": [
+              "McAfee LiveSafe (trial)",
+              "Dropbox Promo",
+              "WildTangent Games",
+              "Cortana Companion"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "module": "memory",
+      "module_label": "Memory",
+      "module_version": "1.0",
+      "exit_code": 0,
+      "findings": [
+        {
+          "id": "MEM-0001",
+          "severity": "PASS",
+          "title": "Memory integrity: passed",
+          "explanation": "16 GB DDR4 dual-channel detected, no ECC errors, no signs of memory pressure during baseline observation.",
+          "recommended_action": null,
+          "estimated_repair_minutes": 0,
+          "estimated_cost_usd": 0,
+          "evidence": {
+            "total_gb": 16,
+            "slot_count": 2,
+            "channel_config": "dual",
+            "ecc_correctable_errors": 0,
+            "ecc_uncorrectable_errors": 0
+          }
+        }
+      ]
+    },
+    {
+      "module": "system",
+      "module_label": "System ID",
+      "module_version": "1.0",
+      "exit_code": 0,
+      "findings": [
+        {
+          "id": "SYS-0001",
+          "severity": "PASS",
+          "title": "System identification complete",
+          "explanation": "Dell Latitude 7440, BIOS 1.12.0 (2025-08-14), Windows 11 Pro build 26100.1000. No identification anomalies.",
+          "recommended_action": null,
+          "estimated_repair_minutes": 0,
+          "estimated_cost_usd": 0,
+          "evidence": {}
+        }
+      ]
+    }
+  ],
+
+  "skipped_modules": [],
+  "warnings": [],
+  "errors": []
+}
