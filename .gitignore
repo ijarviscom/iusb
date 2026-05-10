@@ -1,0 +1,68 @@
+# OS junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Build / dist
+dist/
+build/
+out/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+logs/
+
+# Runtime / scan artifacts that shouldn't be committed
+report-*.html
+report-*.json
+scan-output-*.json
+launcher-output.log
+
+# Secrets, never commit
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Coverage and test artifacts
+coverage/
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Node tooling (used only for docs site, if ever)
+node_modules/
+npm-debug.log
+yarn-error.log
+.next/
+
+# Local config overrides
+config.local.json
+config.dev.json
+
+# Misc
+.cache/
+tmp/

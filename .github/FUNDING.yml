@@ -1,0 +1,6 @@
+# Direct GitHub's "Sponsor" button to the iUSB early-access page and Enterprise inquiry.
+# Once GitHub Sponsors is set up for iJarvis LLC, that handle can be added here.
+
+custom:
+  - "https://iusb.us/#early-access"
+  - "mailto:hello@ijarvis.ai?subject=iUSB%20Enterprise%20inquiry"

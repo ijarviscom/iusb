@@ -1,0 +1,69 @@
+# Shell and PowerShell linting.
+# This workflow becomes active once source code lands in `src/` at public release.
+# For now, it runs as a no-op so the badge stays green and the workflow is wired up.
+
+name: Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '.github/workflows/lint.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '.github/workflows/lint.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    name: shellcheck (bash, macOS and Linux scanners)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip if src/ is empty
+        id: src-check
+        run: |
+          if [ -d "src" ] && [ -n "$(ls -A src 2>/dev/null)" ]; then
+            echo "has_src=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_src=false" >> "$GITHUB_OUTPUT"
+            echo "No src/ contents yet (private beta). Skipping lint."
+          fi
+      - name: Run shellcheck
+        if: steps.src-check.outputs.has_src == 'true'
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './src'
+          severity: warning
+
+  psscriptanalyzer:
+    name: PSScriptAnalyzer (Windows scanner)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip if src/ is empty
+        id: src-check
+        shell: pwsh
+        run: |
+          if ((Test-Path src) -and ((Get-ChildItem src -ErrorAction SilentlyContinue).Count -gt 0)) {
+            "has_src=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          } else {
+            "has_src=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+            Write-Host "No src/ contents yet (private beta). Skipping lint."
+          }
+      - name: Run PSScriptAnalyzer
+        if: steps.src-check.outputs.has_src == 'true'
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+          $results = Invoke-ScriptAnalyzer -Path src -Recurse -Severity Warning
+          if ($results) {
+            $results | Format-Table -AutoSize
+            throw "PSScriptAnalyzer found $($results.Count) issues"
+          }
